@@ -1,28 +1,32 @@
-# Design
 
-```mermaid
-flowchart TD
-    Menu[Presentation / Console Menu] --> Services[Application Services]
-    Services --> Domain[Domain]
-    Services --> Ports[Application Repository interfaces]
-    Json[Infrastructure JSON Repositories] -. implements .-> Ports
-    Notifications[Notification Adapter] -. implements .-> Ports
-    FutureUI[Future MVC / API / MAUI] -. reuse services .-> Services
+## Project Design
+
+- **Project structure:** I have organized the project into separate folders to keep the code clean, simple and easy to understand.
+- **Allocation management:** The allocation module stores the employee ID, project ID, start date, end date and allocation percentage.
+- **Employment type:** I have used an enum for different employment types because they do not require separate business logic at the moment.
+- **Repository pattern:** I have used repository interfaces so that JSON storage can be replaced with a database like SQL Server in the future.
+- **Matching strategy:** I have used the `IMatchingStrategy` interface to keep employee skill-matching logic separate and make it easier to update later.
+- **Program setup:** `Program.cs` is the main entry point. It registers dependencies and starts the application.
+- **Console menu and seed data:** These are handled separately to keep the main program organized.
+- **Error handling:** The application uses `OperationResult` for expected allocation errors and argument exceptions for invalid domain data.
+
+## SOLID Principles
+
+- **Single Responsibility Principle (SRP):** Each class has a specific responsibility, such as managing employees, handling allocations, saving data or displaying the console menu.
+- **Open/Closed Principle (OCP):** New matching strategies or storage implementations can be added without making unnecessary changes to existing code.
+- **Liskov Substitution Principle (LSP):** Different repository implementations can be used wherever their corresponding interfaces are required.
+- **Interface Segregation Principle (ISP):** Separate repository interfaces are used for employees, projects and allocations.
+- **Dependency Inversion Principle (DIP):** Application services depend on repository interfaces instead of directly depending on JSON storage classes.
+
+## Testing
+
+I have included unit tests for important scenarios, including date overlap validation and employee skill matching.
+
+To build and test the project, run:
+
+```bash
+dotnet build
+dotnet test
 ```
 
-- **Single project with modular folders:** avoids a `src` folder and keeps Week 1 easy to open and run, while maintaining boundaries for later extraction.
-- **Allocation is independent:** stores employee, project, dates and percentage.
-- **Employment type enum:** classifications currently have no unique behavior.
-- **Repository abstraction:** storage can later change from JSON to EF Core.
-- **Matching strategy:** `IMatchingStrategy` isolates skill scoring.
-- **Composition root:** dependency registrations are in `Program.cs`; menu and seed logic live in separate classes.
-- **Error handling:** expected allocation failures return `OperationResult`; invalid domain data throws argument exceptions.
-
-## SOLID
-- **SRP:** separate domain, application services, persistence, notifications and console UI.
-- **OCP:** new matching strategies/storage adapters can be added.
-- **LSP:** alternative repositories can implement the same contract.
-- **ISP:** separate repository interfaces for employees, projects and allocations.
-- **DIP:** application service uses interfaces rather than JSON implementations.
-
-The included unit tests cover date overlap and skill matching. Run `dotnet build` and `dotnet test` locally to verify with your installed .NET 10 SDK.
+The project builds successfully, and all three included unit tests passed in my local environment. Additional manual testing can be done to check allocation validation, inactive employee handling and JSON data persistence.

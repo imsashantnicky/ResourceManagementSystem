@@ -1,18 +1,81 @@
-# RMS Console Application
+# Resource Management System
 
-This is a **single console application project**. There is no `src` folder. The modular folders are directly inside the project root.
+## About the Project
 
-## Run
-Install the .NET 10 SDK, then run from the project root:
+I have developed this project as a console-based Resource Management System using C# and .NET 10. It helps manage employees, projects and employee allocations.
+
+The project is organized into separate folders to keep the code clean, structured and easy to maintain. Repository interfaces are placed inside `Application/Repository`, and JSON files are used to store application data.
+
+## Features
+
+- View the list of employees.
+- View the list of projects.
+- Allocate employees to projects.
+- Match employees with projects based on their skills.
+- Deactivate employees.
+- Validate allocation dates and prevent overlapping allocations.
+- Store application data in JSON files.
+- Seed the application with initial sample data.
+
+## Project Structure
+
+- `Domain/` – Contains domain models, enums and business rules.
+- `Application/` – Contains application services and repository interfaces.
+- `Infrastructure/` – Handles JSON data storage and repository implementations.
+- `Presentation/` – Contains the console menu and user interaction.
+- `Tests/` – Contains unit tests.
+- `Program.cs` – Entry point of the application.
+- `DESIGN.md` – Explains the project design and SOLID principles.
+
+## Requirements
+
+- .NET 10 SDK
+- A terminal or IDE such as Visual Studio Code or Visual Studio
+
+## How to Run
+
+Open the terminal in the project root directory and run:
 
 ```bash
 dotnet restore
 dotnet build
 dotnet run
+```
+
+To run the unit tests, execute:
+
+```bash
 dotnet test Tests/ResourceManagementSystem.Tests.csproj
 ```
 
-All entity identifiers (`Employee.Id`, `Project.Id`, `Allocation.Id`, and foreign keys) use `int`. Repository interfaces are grouped under `Application/Repository`. The first run seeds 15 employees, 5 projects and 10 allocations. JSON data is stored in the application's output `data` directory.
+## Sample Data
 
-Menu: list employees, list projects, allocate an employee, match employees to project skills, deactivate an employee, exit.
-# ResourceManagementSystem
+On the first run, the application seeds the following sample data:
+
+- 15 employees
+- 5 projects
+- 10 allocations
+
+Employee IDs, project IDs, allocation IDs and their related foreign keys use the `int` data type.
+
+JSON data is stored in the application's output `data` directory.
+
+## Technologies Used
+
+- C#
+- .NET 10
+- JSON file persistence
+- xUnit for unit testing
+- Repository Pattern
+- SOLID principles
+
+## Testing
+
+The project builds successfully, and all three included unit tests passed. The tests cover date overlap validation and employee skill matching.
+
+## Future Improvements
+
+- Add SQL Server or Entity Framework Core for database storage.
+- Develop a web API or web interface.
+- Add more unit tests for allocation validation and employee management.
+- Improve employee-project matching with additional criteria.
