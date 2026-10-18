@@ -1,0 +1,9 @@
+namespace ResourceManagementSystem.Domain.Enums;
+
+public enum ProjectStatus
+{
+    Planned,
+    Active,
+    OnHold,
+    Completed
+}
