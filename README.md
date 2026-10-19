@@ -4,7 +4,7 @@
 
 I have developed this project as a console-based Resource Management System using C# and .NET 10. It helps manage employees, projects and employee allocations.
 
-The project is organized into separate folders to keep the code clean, structured and easy to maintain. Repository interfaces are placed inside `Application/Repository`, and JSON files are used to store application data.
+The project is organized into separate folders to keep the code clean, structured and easy to maintain. JSON files are used to store application data.
 
 ## Features
 
@@ -66,16 +66,9 @@ JSON data is stored in the application's output `data` directory.
 - .NET 10
 - JSON file persistence
 - xUnit for unit testing
-- Repository Pattern
 - SOLID principles
 
 ## Testing
 
 The project builds successfully, and all three included unit tests passed. The tests cover date overlap validation and employee skill matching.
 
-## Future Improvements
-
-- Add SQL Server or Entity Framework Core for database storage.
-- Develop a web API or web interface.
-- Add more unit tests for allocation validation and employee management.
-- Improve employee-project matching with additional criteria.
